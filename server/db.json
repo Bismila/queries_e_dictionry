@@ -2,79 +2,79 @@
     "words": [
         {
             "id": 1,
-            "name": "Hello"
+            "word": "Hello"
         },
         {
             "id": 2,
-            "name": "Window"
+            "word": "Window"
         },
         {
             "id": 3,
-            "name": "Apple"
+            "word": "Apple"
         },
         {
             "id": 4,
-            "name": "Star"
+            "word": "Star"
         },
         {
             "id": 5,
-            "name": "Toyota"
+            "word": "Toyota"
         },
         {
             "id": 6,
-            "name": "Tesla"
+            "word": "Tesla"
         },
         {
             "id": 7,
-            "name": "ballhawk"
+            "word": "ballhawk"
         },
         {
             "id": 8,
-            "name": "calls"
+            "word": "calls"
         },
         {
             "id": 9,
-            "name": "fells"
+            "word": "fells"
         },
         {
             "id": 10,
-            "name": "kelly"
+            "word": "kelly"
         },
         {
             "id": 11,
-            "name": "molly"
+            "word": "molly"
         },
         {
             "id": 12,
-            "name": "hood"
+            "word": "hood"
         },
         {
             "id": 13,
-            "name": "molly"
+            "word": "molly"
         },
         {
             "id": 14,
-            "name": "peek"
+            "word": "peek"
         },
         {
             "id": 15,
-            "name": "yahoo"
+            "word": "yahoo"
         },
         {
             "id": 16,
-            "name": "whoop"
+            "word": "whoop"
         },
         {
             "id": 17,
-            "name": "spoon"
+            "word": "spoon"
         },
         {
             "id": 18,
-            "name": "week"
+            "word": "week"
         },
         {
             "id": 19,
-            "name": "whoop"
+            "word": "whoop"
         }
     ]
 }

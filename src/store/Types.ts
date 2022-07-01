@@ -1,6 +1,6 @@
 export type Word = {
     id: number;
-    name: string;
+    word: string;
 }
 
 export type Datasets = {

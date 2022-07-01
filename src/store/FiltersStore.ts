@@ -30,8 +30,8 @@ class FiltersStore {
 
     startWordLetter (letter: string) {
         let count = 0;
-        for (const word of this.dictionary.words) {
-            const firstChar = word.name.substr(0, 1).toLowerCase();
+        for (const item of this.dictionary.words) {
+            const firstChar = item.word.substr(0, 1).toLowerCase();
             if (letter && firstChar === letter.toLowerCase()) {
                 ++ count; 
             }
@@ -41,8 +41,8 @@ class FiltersStore {
 
     startWordLetters (letter: string) {
         let count = 0;
-        for (const word of this.dictionary.words) {
-            const firstChars = word.name.substr(0, letter.length).toLowerCase();
+        for (const item of this.dictionary.words) {
+            const firstChars = item.word.substr(0, letter.length).toLowerCase();
             if (letter && firstChars === letter.toLowerCase()) {
                 ++ count;
             }
@@ -55,9 +55,9 @@ class FiltersStore {
 
         let count = 0;
         if (letter) {
-            for (const word of this.dictionary.words) {
+            for (const item of this.dictionary.words) {
                 const search = letter.toLowerCase();
-                const nameWord = word.name.toLowerCase();
+                const nameWord = item.word.toLowerCase();
                 if (nameWord.endsWith(search)) {
                     ++ count;
                 }
@@ -80,8 +80,8 @@ class FiltersStore {
     timesLetter = (letter: string) => {
         let numberSymbols = 0;
         if (letter) {
-            for (const word of this.dictionary.words) {
-                let countLetterInWord = this.checkCharTimes(word.name.toLowerCase(), letter.toLowerCase())
+            for (const item of this.dictionary.words) {
+                let countLetterInWord = this.checkCharTimes(item.word.toLowerCase(), letter.toLowerCase())
                 numberSymbols += countLetterInWord; 
 
             }
@@ -94,8 +94,8 @@ class FiltersStore {
         let number = 0;
         var regex = new RegExp('(' + symbols + ')\\1','i');
         if(symbols) {
-            for (const word of this.dictionary.words) {
-                if (regex.test(word.name.toLowerCase())) {
+            for (const item of this.dictionary.words) {
+                if (regex.test(item.word.toLowerCase())) {
                     ++ number;
                 }
             }
@@ -112,7 +112,6 @@ class FiltersStore {
             this.countLetterTimes,
             this.countRepeatSymbols,
         ];
-        console.log('generatedChartData mobx', data);
 
         let labels: string[] = [
             'start letter',
@@ -126,7 +125,7 @@ class FiltersStore {
             labels,
             datasets: [
                 {
-                label: 'Dictionary count of words',
+                label: 'Counting words in a dictionary',
                 data,
                 backgroundColor: 'rgba(255, 99, 132, 0.5)',
                 }
