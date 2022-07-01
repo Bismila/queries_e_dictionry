@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-// import * as faker from 'faker';
 import {
   Chart as ChartJS,
   CategoryScale,

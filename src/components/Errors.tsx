@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from '@emotion/styled';
 
-
 const ErrorContainer = styled.div`
    display: flex;
    flex-direction: row;
