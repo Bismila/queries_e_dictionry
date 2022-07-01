@@ -2,7 +2,7 @@ import { action, makeObservable, observable } from "mobx";
 import { DictionaryStore } from "./DictionaryStore";
 import { ChartType } from "./Types";
 
-class Filters {
+class FiltersStore {
     dictionary: DictionaryStore = new DictionaryStore();
 
     countStartLetter = 0;
@@ -137,4 +137,4 @@ class Filters {
     }
 }
 
-export default new Filters();
+export default new FiltersStore();

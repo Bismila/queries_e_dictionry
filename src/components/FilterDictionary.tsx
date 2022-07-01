@@ -1,11 +1,12 @@
-import { Observer } from 'mobx-react-lite';
+import { observer, Observer } from 'mobx-react-lite';
 import * as React from 'react';
 import { useCallback, useEffect } from 'react';
-import filters from '../store/Filters';
+import filters from '../store/FiltersStore';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react'
 import InputLabel from './InputLabel';
 import Chart from './Chart';
+import Errors from './Errors';
 
 const filter = filters;
 
@@ -51,20 +52,20 @@ const Counter = styled.span`
 
 const ChartContainer = styled.div`
 ${() => css`
-        @media (max-width: 600px) {
-            position: fixed;
-            bottom: 0;
-            background-color: white;
-        }
-    `
+    @media (max-width: 600px) {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: white;
+    }
+`
 };`;
 
 const FilterDictionary: React.FC = () => {
   
     useEffect(() => {
-        if (filter.dictionary.words.length === 0) {
-            filter.dictionary.loadWords();
-        } 
+        filter.dictionary.loadWords();
     }, []);
 
     const onStartWordLetter = useCallback(
@@ -91,10 +92,15 @@ const FilterDictionary: React.FC = () => {
         (letter: string) => {
             filter.repeatSymbols(letter);
     },[]);
-
+   
+    if (filter.dictionary.isError) {
+        return <Errors />
+    }
 
     
-    return (<>
+
+    
+    return !filter.dictionary.isLoadingData && (<>
         <Title>Dictionary Search</Title>
         <Container>
             <InputWrapper>
@@ -105,7 +111,13 @@ const FilterDictionary: React.FC = () => {
                     searchFilter={onStartWordLetter}
                     maxLenght={1}
                 />
-                <Observer>{ () => (<Counter>{ filter.countStartLetter }</Counter>) }</Observer> 
+                <Observer>
+                    {
+                        () => {
+                            return (<Counter>{ filter.countStartLetter }</Counter> )
+                        }
+                    }
+                </Observer> 
             </InputWrapper>
             
             <InputWrapper>
@@ -161,7 +173,7 @@ const FilterDictionary: React.FC = () => {
                <InputLabel 
                     name="repeatSymbols" 
                     id="repeatSymbols" 
-                    label="How many words have the same letter repeated in conjunction: "
+                    label="How many words have the same letter repeated: "
                     searchFilter={onRepeatLetter}
                     maxLenght={1}
                 />
@@ -193,4 +205,5 @@ const FilterDictionary: React.FC = () => {
     )
 }
 
-export default FilterDictionary;
+export default observer( FilterDictionary);
+
