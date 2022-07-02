@@ -6,7 +6,7 @@ export type Word = {
 export type Datasets = {
     label: string;
     data: number[];
-    backgroundColor: string;
+    backgroundColor: string | Array<string>;
 }
 export type ChartType = {
     labels: string[];

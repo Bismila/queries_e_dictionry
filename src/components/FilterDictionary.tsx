@@ -1,6 +1,6 @@
 import { observer, Observer } from 'mobx-react-lite';
 import * as React from 'react';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import filters from '../store/FiltersStore';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react'
@@ -58,17 +58,13 @@ const Counter = styled.span`
 const ChartContainer = styled.div`
 ${() => css`
     @media (max-width: 600px) {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background-color: white;
+       
     }
 `
 };`;
 
 const FilterDictionary: React.FC = () => {
-  
+    const chartRef = useRef(null);
     useEffect(() => {
         filter.dictionary.loadWords();
     }, []);
@@ -159,7 +155,7 @@ const FilterDictionary: React.FC = () => {
             </InputWrapper>
         </Container> 
         
-        <ChartContainer>
+        <ChartContainer ref={chartRef}>
             <hr />
             <Observer>
                 { () => (
