@@ -36,9 +36,14 @@ const InputWrapper = styled.div`
     max-width: fit-content;
     background-color: #d4cdc0;
     border: 1px solid #535c53;
+    border-radius: 3px;
+    -webkit-box-shadow: 1px 3px 12px 1px rgba(0,0,0,0.28); 
+    box-shadow: 1px 3px 12px 1px rgba(0,0,0,0.28);
     transition: all .4s;
 
     &:hover {
+        -webkit-box-shadow: 1px 3px 12px 1px rgba(0,0,0,0.47); 
+        box-shadow: 1px 3px 12px 1px rgba(0,0,0,0.47);
         transform: scale(1.05);
         transition: all .4s;
     }
