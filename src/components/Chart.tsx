@@ -10,9 +10,11 @@ import {
   ArcElement
 } from 'chart.js';
 import styled from '@emotion/styled';
+import { css } from '@emotion/react'
 import { Bar, Doughnut } from 'react-chartjs-2';
 import { ChartType } from '../store/Types';
 import { observer } from 'mobx-react-lite';
+
 ChartJS.register(
     ArcElement,
     CategoryScale,
@@ -24,7 +26,7 @@ ChartJS.register(
 );
 
 const Container = styled.div`
-
+    padding: 1rem 0;
 `;
 
 const ButtonWrapper = styled.div`
@@ -60,9 +62,16 @@ const ChartWrapperBar = styled.div`
 `;
 
 const ChartWrapperDiagram = styled.div`
+${() => css`
     max-width: 500px;
     margin: 0 auto;
-`;
+    
+    @media (max-width: 650px) {
+        transform: scale(.9);
+
+    }
+`
+};`;
 
 interface IChartProps {
     data: number[];
