@@ -25,7 +25,9 @@ export class DictionaryStore {
         try{
             this.inProgress = true;
             const resp = yield getWords();
-            
+            if (resp.length === 0) {
+                throw new Error("No Data in the dictionary")
+            }
             this.fillWords(resp);
              
             this.inProgress = false;
