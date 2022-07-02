@@ -15,7 +15,7 @@ const ErrorTitle = styled.p`
     margin: 0 auto;
     padding: 2rem;
     font-size: 2rem;
-    color: red;
+    color: #535c53;
 `;
 
 const Errors: React.FC = () => {
