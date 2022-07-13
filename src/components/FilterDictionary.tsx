@@ -69,6 +69,7 @@ const ChartContainer = styled.div`
 `;
 
 const FilterDictionary: React.FC = () => {
+    
     const chartRef = useRef(null);
    
     useEffect(() => {
@@ -174,5 +175,5 @@ const FilterDictionary: React.FC = () => {
     </>
 }
 
-export default observer( FilterDictionary);
+export default  FilterDictionary;
 
