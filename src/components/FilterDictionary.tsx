@@ -3,10 +3,8 @@ import * as React from 'react';
 import { useCallback, useEffect, useRef } from 'react';
 import {filterStore} from '../store/FiltersStore';
 import styled from '@emotion/styled';
-import { css } from '@emotion/react'
 import InputLabel from './InputLabel';
 import Chart from './Chart';
-import Errors from './Errors';
 
 const Title = styled.h1`
     margin: 0;
