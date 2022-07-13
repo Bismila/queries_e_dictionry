@@ -1,9 +1,9 @@
-import { action, makeObservable, observable } from "mobx";
-import { DictionaryStore } from "./DictionaryStore";
-import { ChartType } from "./Types";
+import { makeAutoObservable, runInAction } from "mobx";
+import { getWords } from "../api";
+import { ChartType, Word } from "./Types";
 
 class FiltersStore {
-    dictionary: DictionaryStore = new DictionaryStore();
+    words: Word[] = [];
 
     countStartLetter = 0;
     countStartLetters = 0;
@@ -12,42 +12,39 @@ class FiltersStore {
     countRepeatSymbols = 0;
 
     constructor() {
-        makeObservable(this, {
-            dictionary: observable,
-            countStartLetter: observable,
-            countStartLetters: observable,
-            countEndLetter: observable,
-            countLetterTimes: observable,
-            countRepeatSymbols: observable,
-            startWordLetter: action,
-            startWordLetters: action,
-            endWordLetter: action,
-            timesLetter: action,
-            repeatSymbols: action,
-            setChartData: action
+        makeAutoObservable(this);
+    }
+
+    loadingData = async () => {
+        const resp = await getWords();
+        runInAction(() => {
+            if (resp && resp.length) {
+                this.words = [...resp];
+            }
         });
     }
 
     startWordLetter (letter: string) {
         let count = 0;
-        for (const item of this.dictionary.words) {
+
+        for (const item of this.words) {
             const firstChar = item.word.substr(0, 1).toLowerCase();
             if (letter && firstChar === letter.toLowerCase()) {
                 ++ count; 
             }
         }
-        this.countStartLetter = count;
+       this.countStartLetter = count;
     }
 
     startWordLetters (letter: string) {
         let count = 0;
-        for (const item of this.dictionary.words) {
+
+        for (const item of this.words) {
             const firstChars = item.word.substr(0, letter.length).toLowerCase();
             if (letter && firstChars === letter.toLowerCase()) {
                 ++ count;
             }
         }
-        
         this.countStartLetters = count;
     }
 
@@ -55,7 +52,7 @@ class FiltersStore {
 
         let count = 0;
         if (letter) {
-            for (const item of this.dictionary.words) {
+            for (const item of this.words) {
                 const search = letter.toLowerCase();
                 const nameWord = item.word.toLowerCase();
                 if (nameWord.endsWith(search)) {
@@ -80,7 +77,7 @@ class FiltersStore {
     timesLetter = (letter: string) => {
         let numberSymbols = 0;
         if (letter) {
-            for (const item of this.dictionary.words) {
+            for (const item of this.words) {
                 let countLetterInWord = this.checkCharTimes(item.word.toLowerCase(), letter.toLowerCase())
                 numberSymbols += countLetterInWord; 
 
@@ -94,7 +91,7 @@ class FiltersStore {
         let number = 0;
         var regex = new RegExp('(' + symbols + ')\\1','i');
         if(symbols) {
-            for (const item of this.dictionary.words) {
+            for (const item of this.words) {
                 if (regex.test(item.word.toLowerCase())) {
                     ++ number;
                 }
@@ -136,4 +133,4 @@ class FiltersStore {
     }
 }
 
-export default new FiltersStore();
+export const filterStore = new FiltersStore();

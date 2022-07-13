@@ -1,14 +1,12 @@
 import { observer, Observer } from 'mobx-react-lite';
 import * as React from 'react';
-import { useCallback, useEffect, useRef, useState } from 'react';
-import filters from '../store/FiltersStore';
+import { useCallback, useEffect, useRef } from 'react';
+import {filterStore} from '../store/FiltersStore';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react'
 import InputLabel from './InputLabel';
 import Chart from './Chart';
 import Errors from './Errors';
-
-const filter = filters;
 
 const Title = styled.h1`
     margin: 0;
@@ -80,39 +78,39 @@ const FilterDictionary: React.FC = () => {
     const chartRef = useRef(null);
    
     useEffect(() => {
-        filter.dictionary.loadWords();
+        filterStore.loadingData();
     }, []);
 
     const onStartWordLetter = useCallback(
       (letter: string) => {
-        filter.startWordLetter(letter);
+        filterStore.startWordLetter(letter);
       },[]);
 
     const onStartWordLetters = useCallback(
     (letter: string) => {
-        filter.startWordLetters(letter);
+        filterStore.startWordLetters(letter);
     },[]);
 
     const onEndWordLetter = useCallback(
     (letter: string) => {
-        filter.endWordLetter(letter);
+        filterStore.endWordLetter(letter);
     },[]);
 
     const onTimesLetter = useCallback(
         (letter: string) => {
-            filter.timesLetter(letter);
+            filterStore.timesLetter(letter);
     },[]);
 
     const onRepeatLetter = useCallback(
         (letter: string) => {
-            filter.repeatSymbols(letter);
+            filterStore.repeatSymbols(letter);
     },[]);
    
-    if (filter.dictionary.isError) {
-        return <Errors />
-    }
+    // if (filterStore.dictionary.isError) {
+    //     return <Errors />
+    // }
     
-    return !filter.dictionary.isLoadingData && (<>
+    return /*!filterStore.dictionary.isLoadingData && */(<>
         <Title>Dictionary Search</Title>
         <Container>
             <InputWrapper>
@@ -123,7 +121,7 @@ const FilterDictionary: React.FC = () => {
                     searchFilter={onStartWordLetter}
                     maxLenght={1}
                 />
-                <Observer>{() => (<Counter>{ filter.countStartLetter }</Counter> )}</Observer> 
+                <Observer>{() => (<Counter>{ filterStore.countStartLetter }</Counter> )}</Observer> 
             </InputWrapper>
             
             <InputWrapper>
@@ -133,7 +131,7 @@ const FilterDictionary: React.FC = () => {
                     label="How many words with start letters: "
                     searchFilter={onStartWordLetters}
                 />
-                <Observer>{() => (<Counter>{ filter.countStartLetters }</Counter> )}</Observer> 
+                <Observer>{() => (<Counter>{ filterStore.countStartLetters }</Counter> )}</Observer> 
             </InputWrapper>
 
             <InputWrapper>
@@ -143,7 +141,7 @@ const FilterDictionary: React.FC = () => {
                     label="How many words end with the letter: "
                     searchFilter={onEndWordLetter}
                 />
-                <Observer>{() => (<Counter>{ filter.countEndLetter }</Counter> )}</Observer> 
+                <Observer>{() => (<Counter>{ filterStore.countEndLetter }</Counter> )}</Observer> 
             </InputWrapper>
             
             <InputWrapper>
@@ -154,7 +152,7 @@ const FilterDictionary: React.FC = () => {
                     searchFilter={onTimesLetter}
                     maxLenght={1}
                 />
-                <Observer>{() => (<Counter>{ filter.countLetterTimes }</Counter> )}</Observer> 
+                <Observer>{() => (<Counter>{ filterStore.countLetterTimes }</Counter> )}</Observer> 
             </InputWrapper>
 
             <InputWrapper>
@@ -165,7 +163,7 @@ const FilterDictionary: React.FC = () => {
                     searchFilter={onRepeatLetter}
                     maxLenght={1}
                 />
-                <Observer>{() => (<Counter>{ filter.countRepeatSymbols }</Counter> )}</Observer> 
+                <Observer>{() => (<Counter>{ filterStore.countRepeatSymbols }</Counter> )}</Observer> 
             </InputWrapper>
         </Container> 
         
@@ -174,11 +172,11 @@ const FilterDictionary: React.FC = () => {
             <Observer>
                 { () => (
                     <Chart data={[
-                        filter.countStartLetter,
-                        filter.countStartLetters,
-                        filter.countEndLetter,
-                        filter.countLetterTimes,
-                        filter.countRepeatSymbols
+                        filterStore.countStartLetter,
+                        filterStore.countStartLetters,
+                        filterStore.countEndLetter,
+                        filterStore.countLetterTimes,
+                        filterStore.countRepeatSymbols
                     ]} />
                 )}
             </Observer>
