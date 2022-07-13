@@ -1,14 +1,6 @@
 import { useState } from "react";
 import styled from '@emotion/styled';
 
-interface IInputLabelProps {
-    id: string;
-    name: string;
-    label: string;
-    maxLenght?: number;
-    searchFilter: (letter: string) => void;
-}
-
 const LabelContainer = styled.label`
     display: flex;
     flex-direction: row;
@@ -50,6 +42,15 @@ const Input = styled.input`
         border: 1px solid #535c53;
     }
 `;
+
+interface IInputLabelProps {
+    id: string;
+    name: string;
+    label: string;
+    maxLenght?: number;
+    searchFilter: (letter: string) => void;
+    value?: string;
+}
 
 const InputLabel: React.FC<IInputLabelProps> = (props) => {
     const {id, name, searchFilter, maxLenght, label} = props;
