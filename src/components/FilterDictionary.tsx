@@ -16,7 +16,6 @@ const Title = styled.h1`
 `;
 
 const Container = styled.div`
-${() => css`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -28,8 +27,7 @@ ${() => css`
         padding-bottom: 20rem;
         overflow: scroll;
     }
-`
-};`;
+`;
 
 const InputWrapper = styled.div`
     display: flex;
@@ -61,7 +59,6 @@ const Counter = styled.span`
 `;
 
 const ChartContainer = styled.div`
-${() => css`
     @media (max-width: 650px) {
         position: fixed;
         height: 20rem;
@@ -71,8 +68,7 @@ ${() => css`
         background-color: white;
         overflow: scroll;
     }
-`
-};`;
+`;
 
 const FilterDictionary: React.FC = () => {
     const chartRef = useRef(null);
@@ -105,12 +101,8 @@ const FilterDictionary: React.FC = () => {
         (letter: string) => {
             filterStore.repeatSymbols(letter);
     },[]);
-   
-    // if (filterStore.dictionary.isError) {
-    //     return <Errors />
-    // }
     
-    return /*!filterStore.dictionary.isLoadingData && */(<>
+    return <>
         <Title>Dictionary Search</Title>
         <Container>
             <InputWrapper>
@@ -182,7 +174,6 @@ const FilterDictionary: React.FC = () => {
             </Observer>
         </ChartContainer>
     </>
-    )
 }
 
 export default observer( FilterDictionary);
